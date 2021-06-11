@@ -18,7 +18,7 @@ async def add_task(event):
         await msg.edit("`Encoding video...`")
         new_file = encode(filepath)
         if new_file:
-            msg.edit("`Video Encoded, getting metadata...`")
+            await msg.edit("`Video Encoded, getting metadata...`")
             duration = get_duration(new_file)
             thumb = get_thumbnail(new_file, download_dir, duration / 4)
             width, height = get_width_height(new_file)
