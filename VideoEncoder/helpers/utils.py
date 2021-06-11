@@ -22,8 +22,9 @@ async def add_task(event):
             duration = get_duration(new_file)
             thumb = get_thumbnail(new_file, download_dir, duration / 4)
             width, height = get_width_height(new_file)
-            msg.edit("`Uploading video...`")
-            await event.reply(
+            await msg.edit("`Uploading video...`")
+            await event.client.send_message(
+                event.chat_id,
                 file=new_file,
                 supports_streaming=True,
                 thumb=thumb,
