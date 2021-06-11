@@ -1,5 +1,4 @@
-pyrogram
-TgCrypto
-python-dotenv
+telethon
+python-decouple
 hachoir
 ffmpeg-python
