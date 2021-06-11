@@ -5,10 +5,10 @@ from telethon.tl.types import DocumentAttributeVideo
 from .. import download_dir
 
 
-def on_task_complete():
+async def on_task_complete():
     del data[0]
     if len(data) > 0:
-        add_task(data[0])
+        await add_task(data[0])
 
 
 async def add_task(event):
@@ -42,4 +42,4 @@ async def add_task(event):
             remove(filepath)
     except Exception as e:
         await msg.edit(f"**ERROR**:\n`{e}`")
-    on_task_complete()
+    await on_task_complete()
