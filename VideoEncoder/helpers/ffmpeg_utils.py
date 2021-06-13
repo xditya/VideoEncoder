@@ -1,3 +1,5 @@
+#  Copyright (C) 2021 The Authors
+
 import os
 import time
 import ffmpeg

@@ -1,3 +1,5 @@
+#  Copyright (C) 2021 The Authors
+
 from telethon import events, Button
 from .. import *
 from ..helpers import *
@@ -17,3 +19,17 @@ video_mimetype = [
     "video/quicktime",
     "video/mpeg",
 ]
+
+bot = bot_db["USERS"]
+
+
+async def add_user(id):
+    await bot.insert_one({"user": id})
+
+
+async def check_user(id):
+    return bool(await bot.find_one({"user": id}))
+
+
+async def all_users():
+    return [i async for i in bot.find()]

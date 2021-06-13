@@ -1,3 +1,5 @@
+#  Copyright (C) 2021 The Authors
+
 from os import remove
 from VideoEncoder import data, download_dir
 from .ffmpeg_utils import encode, get_thumbnail, get_duration, get_width_height
