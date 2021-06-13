@@ -4,6 +4,7 @@ A Telegram bot to convert videos into x265/x264 format via ffmpeg.
 ### Configuration
 Add values in environment variables or add them in [.env.sample](./.env.sample) and rename file to `.env`.
 - `BOT_TOKEN` - Get it by creating a bot on [@BotFather](https://t.me/BotFather).
+- `MONGO_URL` - Mongo Database URL.
 
 ### Configuring Encoding Format
 To change the ffmpeg profile edit them in [ffmpeg_utils.py](/VideoEncoder/helpers/ffmpeg_utils.py)
