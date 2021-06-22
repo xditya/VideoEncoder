@@ -1,0 +1,11 @@
+---
+application:
+  name: "videoencoder"
+  project: "xditya"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-videoencoder"
+  routes:
+  - application_name: "videoencoder"
+    paths:
+    - "/*"
