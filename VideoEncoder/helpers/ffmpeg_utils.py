@@ -49,16 +49,16 @@ def encode(filepath):
             # Copy stream to hvc1
             video_opts = "-c:v copy -tag:v hvc1"
     else:
-        # Transcode to h265 / hvc1
-        video_opts = "-c:v libx265 -crf 28 -tag:v hvc1 -preset fast -threads 8"
+        # Transcode to h264
+        video_opts = "-c:v libx264 -crf 29 -preset medium -tune animation -b:v 350k -threads 8"
     # Get the audio channel codec
     audio_codec = get_codec(filepath, channel="a:0")
     if audio_codec == []:
         audio_opts = ""
-    elif audio_codec[0] == "aac":
-        audio_opts = "-c:a copy"
+    elif audio_codec[0] == "libvorbis":
+        audio_opts = "-c:a libopus"
     else:
-        audio_opts = "-c:a aac -b:a 128k"
+        audio_opts = "-c:a libvorbis -b:a 60k -profile:a aac_he_v2 -ac 2 -vbr 2"
     call(
         ["ffmpeg", "-i", filepath]
         + video_opts.split()
@@ -97,4 +97,4 @@ def get_width_height(filepath):
     if metadata.has("width") and metadata.has("height"):
         return metadata.get("width"), metadata.get("height")
     else:
-        return 1280, 720
+        return 856, 480
