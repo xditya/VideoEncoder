@@ -29,7 +29,7 @@ def get_codec(filepath, channel="v:0"):
 
 def encode(filepath):
     basefilepath = os.path.splitext(filepath)[0]
-    output_filepath = basefilepath + " 1080p" + ".mp4"
+    output_filepath = basefilepath + ".HEVC" + ".mp4" #Change .HEVC to what name you want before extension
     assert output_filepath != filepath
     if os.path.isfile(output_filepath):
         logging.info('Skipping "{}": file already exists'.format(output_filepath))
