@@ -29,7 +29,7 @@ def get_codec(filepath, channel="v:0"):
 
 def encode(filepath):
     basefilepath = os.path.splitext(filepath)[0]
-    output_filepath = basefilepath + ".HEVC" + ".mp4"
+    output_filepath = basefilepath + " 1080p" + ".mp4"
     assert output_filepath != filepath
     if os.path.isfile(output_filepath):
         logging.info('Skipping "{}": file already exists'.format(output_filepath))
@@ -49,19 +49,26 @@ def encode(filepath):
             # Copy stream to hvc1
             video_opts = "-c:v copy -tag:v hvc1"
     else:
-        # Transcode to h265 / hvc1
-        video_opts = "-c:v libx265 -crf 28 -tag:v hvc1 -preset fast -threads 8"
-    # Get the audio channel codec
-    audio_codec = get_codec(filepath, channel="a:0")
-    if audio_codec == []:
-        audio_opts = ""
-    elif audio_codec[0] == "aac":
-        audio_opts = "-c:a copy"
-    else:
-        audio_opts = "-c:a aac -b:a 128k"
+        # video option read ffmpeg Documentation
+        codec_opts = "-c:v libx265" #for h264 change libx265 to libx264
+        profile_opts = "-profile:v high" #choose video profile you want
+        tag_opts =  "-tag:v hvc1" #change to avc1 if want h264
+        tune_opts = "-tune animation" #choose suitable tune 
+        lvl_opts = "-level 3.1" #encoding level
+        crf_opts = "-crf 24" #Constant rate factor lower is better quality but big size
+        preset_opts = "-preset fast" #Choose preset more fast more worst quality
+        core_opts = "-threads 8" #depends on yours cpu core
+        audio_opts = "-c:a aac -b:a 128k" #choose audio format and bitrate you want
     call(
         ["ffmpeg", "-i", filepath]
-        + video_opts.split()
+        + codec_opts.split()
+        + profile_opts.split()
+        + crf_opts.split()
+        + tag_opts.split()
+        + preset_opts.split()
+        + lvl_opts.split()
+        + tune_opts.split()
+        + core_opts.split()
         + audio_opts.split()
         + [output_filepath]
     )
